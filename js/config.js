@@ -2,7 +2,7 @@ window.PLAY_UNO_CONFIG = Object.freeze({
   API_BASE: "",
   // Set your Dropbox link here. Change ?dl=0 to ?dl=1 for direct download.
   // Example: "https://www.dropbox.com/s/YOURFILEID/PlayUno-Setup.exe?dl=1"
-  DOWNLOAD_URL: "https://www.dropbox.com/scl/fi/4uh3ahy9f925mks5i368w/PlayUno-Setup.exe?rlkey=niqh4moz7qvvomw3vspq5y0gg&st=68lcydvp&dl=1",
+  DOWNLOAD_URL: "https://www.dropbox.com/scl/fi/e1pdwp15nr8fjfqut35xa/PlayUno-Setup.exe?rlkey=ibbmc14cozk5e9s6zvg5qkx88&st=sc2ylp5g&dl=1",
   MAX_PLAYERS: 10,
   ROOM_PREFIX: "UNO-",
   
