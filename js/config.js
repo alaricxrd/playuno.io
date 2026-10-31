@@ -9,5 +9,5 @@ window.PLAY_UNO_CONFIG = Object.freeze({
   // Special usernames that are treated as "downloaded app" users
   // These users can use voice chat and won't block game start
   // Add usernames in lowercase
-  PRIVILEGED_USERS: ["diana7", "", ""]
+  PRIVILEGED_USERS: ["diana", "yyy", "yys"]
 });
