@@ -1,0 +1,275 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#09030d">
+  <title>Room Lobby — Play Uno Together</title>
+  <link rel="icon" type="image/png" sizes="64x64" href="../assets/logos/favicon-64.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../ajax/libs/font-awesome/6.5.2/css/all.min.css">
+  <link rel="stylesheet" href="../css/room.css">
+</head>
+<body>
+  <div id="pageLoader" class="page-loader"><div class="loader-ring"></div></div>
+
+  <!-- HEADER -->
+  <header class="room-header">
+    <div class="room-header-inner">
+      <a class="brand" href="../index.htm">
+        <span class="brand-mark"><img src="../assets/logos/logo-mark.png" alt="Play Uno Together"></span>
+        <span class="brand-copy">
+          <strong>PLAY UNO TOGETHER</strong>
+          <small>ROOM LOBBY</small>
+        </span>
+      </a>
+
+      <div class="room-code-badge">
+        <span class="room-code-label" id="roomCodeLabel">ROOM CODE</span>
+        <span class="room-code-value" id="roomCodeDisplay">#UNO-——</span>
+      </div>
+
+      <div class="header-actions">
+        <button class="btn btn-ghost btn-sm" id="copyCodeBtn" type="button">
+          <i class="fa-solid fa-copy"></i>
+          <span id="copyCodeText">Copy Code</span>
+        </button>
+        <button class="btn btn-ghost btn-sm" id="copyInviteBtn" type="button">
+          <i class="fa-solid fa-link"></i>
+          <span id="copyInviteText">Copy Invite</span>
+        </button>
+        <a class="btn btn-ghost btn-sm" href="../index.htm">
+          <i class="fa-solid fa-house"></i>
+          <span id="backHomeText">Home</span>
+        </a>
+        <select class="btn btn-ghost btn-sm" id="langSelect" style="gap:0;padding:7px 10px">
+          <option value="en">EN</option>
+          <option value="tr">TR</option>
+          <option value="de">DE</option>
+        </select>
+      </div>
+    </div>
+  </header>
+
+  <!-- MAIN -->
+  <main class="room-main">
+    <!-- LEFT COLUMN -->
+    <div class="room-left">
+
+      <!-- Room Lobby Players -->
+      <div class="panel">
+        <div class="lobby-panel-header">
+          <div class="lobby-title-group">
+            <div class="panel-title" id="lobbyTitle">Room Lobby</div>
+            <div class="panel-desc" id="lobbyDesc">Invite friends, choose your avatar and wait until everyone is ready.</div>
+          </div>
+          <select class="lobby-mode-select" id="modeSelect" aria-label="Game mode"></select>
+        </div>
+        <div class="players-grid" id="playersGrid"></div>
+        <!-- Bot invite area (only shown to host when slots are empty) -->
+        <div id="botArea" class="bot-area hidden">
+          <button class="btn btn-ghost btn-sm" id="inviteBotBtn" type="button">
+            <i class="fa-solid fa-robot"></i>
+            <span id="inviteBotText">Invite Bot</span>
+          </button>
+          <span class="bot-hint" id="botHint">Fill empty slots with bots</span>
+        </div>
+      </div>
+
+      <!-- Table Setup -->
+      <div class="panel">
+        <div class="panel-title" id="setupTitle">Table Setup</div>
+        <div class="panel-desc" id="setupDesc">When everyone is ready, the room owner can control the transition to the game.</div>
+        <div style="height:14px"></div>
+
+        <div class="setup-meta">
+          <span class="setup-meta-badge players" id="playerCountBadge">
+            <i class="fa-solid fa-users"></i>
+            <span id="playerCountText">0 / 4 players</span>
+          </span>
+          <span class="setup-meta-badge status" id="statusBadge">
+            <i class="fa-solid fa-clock"></i>
+            <span id="statusText">WAITING</span>
+          </span>
+        </div>
+
+        <div class="setup-actions">
+          <button class="btn btn-green btn-sm" id="readyBtn" type="button">
+            <i class="fa-solid fa-check"></i>
+            <span id="readyBtnText">READY</span>
+          </button>
+          <button class="btn btn-ghost btn-sm" id="editProfileBtn" type="button">
+            <i class="fa-solid fa-user-pen"></i>
+            <span id="editProfileText">Edit My Profile</span>
+          </button>
+          <button class="btn btn-ghost btn-sm" id="shareBtn" type="button">
+            <i class="fa-solid fa-share-nodes"></i>
+            <span id="shareBtnText">Share</span>
+          </button>
+        </div>
+
+        <div class="ready-bar">
+          <span id="readyLabel">Ready</span>
+          <span class="ready-bar-count" id="readyCount">0 / 0</span>
+        </div>
+
+        <div class="host-msg" id="hostMsg"></div>
+
+        <button class="btn btn-green start-btn" id="startBtn" type="button" disabled>
+          <i class="fa-solid fa-play"></i>
+          <span id="startBtnText">START GAME</span>
+        </button>
+      </div>
+
+      <!-- Room Rules -->
+      <div class="panel">
+        <div class="panel-title" id="rulesTitle">Room Rules</div>
+        <ul class="rules-list">
+          <li><span class="rule-num">01</span><span id="rule1Text">Room capacity is set by the player count chosen when the room is created.</span></li>
+          <li><span class="rule-num">02</span><span id="rule2Text">The room owner can change the mode and start the game.</span></li>
+          <li><span class="rule-num">03</span><span id="rule3Text">Starting the game checks that every player has the desktop app.</span></li>
+        </ul>
+      </div>
+
+    </div>
+
+    <!-- RIGHT COLUMN -->
+    <div class="room-right">
+
+      <!-- Voice Chat (matches screenshot) -->
+      <div class="voice-panel" id="voicePanel">
+        <div class="voice-header">
+          <div class="voice-title-row">
+            <div class="voice-icon"><i class="fa-solid fa-microphone"></i></div>
+            <div>
+              <div class="voice-title" id="voiceTitleText">Voice Chat</div>
+              <div class="voice-sub" id="voiceSubText">Desktop app required</div>
+            </div>
+          </div>
+          <div class="voice-header-right">
+            <button class="btn btn-yellow btn-sm voice-join-btn" id="joinVoiceBtn" type="button">
+              <i class="fa-solid fa-microphone"></i>
+              <span id="joinVoiceBtnText">Join Voice</span>
+            </button>
+            <button class="voice-ctrl-btn hidden" id="micBtn" type="button" title="Toggle mic">
+              <i class="fa-solid fa-microphone"></i>
+            </button>
+            <button class="voice-ctrl-btn hidden" id="leaveVoiceBtn" type="button" title="Leave voice">
+              <i class="fa-solid fa-xmark"></i>
+            </button>
+          </div>
+        </div>
+        <!-- Voice member dots (always visible, shows who is connected) -->
+        <div class="voice-members" id="voiceMembers"></div>
+      </div>
+
+      <!-- Room Chat -->
+      <div class="chat-panel">
+        <div class="chat-header">
+          <span class="chat-title" id="chatTitle">Room Chat</span>
+          <span class="chat-live"><span class="chat-live-dot"></span><span id="chatLiveText">REAL TIME</span></span>
+        </div>
+        <div class="chat-emojis">
+          <button class="emoji-btn" type="button" data-emoji="🔥">🔥</button>
+          <button class="emoji-btn" type="button" data-emoji="😂">😂</button>
+          <button class="emoji-btn" type="button" data-emoji="💀">💀</button>
+          <button class="emoji-btn" type="button" data-emoji="⚡">⚡</button>
+          <button class="emoji-btn" type="button" data-emoji="🎮">🎮</button>
+          <button class="emoji-btn" type="button" data-emoji="🃏">🃏</button>
+          <button class="emoji-btn" type="button" data-emoji="🔥">👑</button>
+        </div>
+        <div class="chat-messages" id="chatMessages"></div>
+        <div class="chat-input-row">
+          <input class="chat-input" id="chatInput" type="text" maxlength="500" placeholder="Write a message..." autocomplete="off">
+          <button class="chat-send-btn" id="chatSendBtn" type="button" aria-label="Send">
+            <i class="fa-solid fa-paper-plane"></i>
+          </button>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- PROFILE EDIT MODAL -->
+  <div id="profileModal" class="modal-backdrop hidden" role="dialog" aria-modal="true">
+    <div class="modal-card">
+      <button class="modal-close" type="button" id="profileModalClose"><i class="fa-solid fa-xmark"></i></button>
+      <div class="modal-icon yellow"><i class="fa-solid fa-user-pen"></i></div>
+      <h3 id="profileModalTitle">Edit Profile</h3>
+      <p id="profileModalDesc">Change the name and avatar shown in the room.</p>
+      <label class="field-label">
+        <span id="profileNameLabel">Username</span>
+        <input id="profileNameInput" maxlength="24" autocomplete="nickname" placeholder="Enter your username">
+      </label>
+      <div class="label-line">
+        <span id="profileAvatarLabel">Choose your avatar</span>
+        <small>20</small>
+      </div>
+      <div class="avatar-grid" id="profileAvatars"></div>
+      <button class="modal-action save-action" id="profileSaveBtn" type="button" id="profileSaveBtnText">Save</button>
+    </div>
+  </div>
+
+  <!-- WARNING MODAL -->
+  <div id="warningModal" class="modal-backdrop hidden" role="dialog" aria-modal="true">
+    <div class="modal-card warning-modal-card">
+      <button class="modal-close" type="button" id="warningModalClose"><i class="fa-solid fa-xmark"></i></button>
+      <div class="modal-icon red"><i class="fa-solid fa-triangle-exclamation"></i></div>
+      <h3 id="warningTitle">Game Could Not Start</h3>
+      <p id="warningDesc"></p>
+      <ul class="warning-list" id="warningList"></ul>
+      <div class="warning-actions">
+        <button class="btn btn-gold btn-sm" id="warningDownloadBtn" type="button" style="flex:1;justify-content:center">
+          <i class="fa-solid fa-download"></i>
+          <span>Download App</span>
+        </button>
+        <button class="btn btn-ghost btn-sm" id="warningCloseBtn" type="button" style="flex:1;justify-content:center">
+          <i class="fa-solid fa-xmark"></i>
+          <span>Close</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- VOICE APP REQUIRED MODAL (matches screenshot 2) -->
+  <div id="voiceAppModal" class="modal-backdrop hidden" role="dialog" aria-modal="true">
+    <div class="modal-card voice-app-modal-card">
+      <button class="modal-close" type="button" id="voiceAppModalClose"><i class="fa-solid fa-xmark"></i></button>
+      <div class="voice-app-modal-icon">
+        <i class="fa-solid fa-triangle-exclamation"></i>
+      </div>
+      <h2 class="voice-app-modal-title" id="voiceAppModalTitle">Desktop App Required for Voice Chat</h2>
+      <p class="voice-app-modal-desc" id="voiceAppModalDesc">You need the Play Uno Together desktop app to use voice chat.</p>
+      <button class="btn voice-app-download-btn" id="voiceAppDownloadBtn" type="button">
+        <i class="fa-solid fa-download"></i>
+        <span id="voiceAppDownloadText">Download Desktop</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- KICKED OVERLAY -->
+  <div id="kickedOverlay" class="kicked-overlay hidden">
+    <div class="kicked-card">
+      <div class="kicked-icon">🚫</div>
+      <div class="kicked-title" id="kickedTitle">Removed From Room</div>
+      <div class="kicked-text" id="kickedText">The room owner removed you from the room.</div>
+      <a class="btn btn-red btn-md" href="../index.htm">
+        <i class="fa-solid fa-house"></i>
+        <span id="kickedHomeText">Go to Home</span>
+      </a>
+    </div>
+  </div>
+
+  <!-- TOAST -->
+  <div id="toast" class="toast hidden" role="status"></div>
+
+  <script src="../js/config.js"></script>
+  <script src="../js/download.js"></script>
+  <script src="../js/i18n.js"></script>
+  <script src="../js/audio.js"></script>
+  <script src="../js/sb-backend.js"></script>
+  <script src="../js/room.js"></script>
+</body>
+</html>

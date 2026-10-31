@@ -1,0 +1,391 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#09030d">
+  <meta name="description" content="Play Uno Together — Create a room with friends instantly, voice chat and jump into the desktop UNO experience. Fast, modern and fun.">
+  <meta name="keywords" content="uno, online uno, play uno together, room, multiplayer, card game">
+  <meta property="og:title" content="Play Uno Together — Online Room Lobby">
+  <meta property="og:description" content="Create a room, invite friends, chat and play.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="assets/media/social-preview.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" type="image/png" sizes="64x64" href="assets/logos/favicon-64.png">
+  <link rel="apple-touch-icon" href="assets/logos/apple-touch-icon.png">
+  <title>Play Uno Together — Home</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="ajax/libs/font-awesome/6.5.2/css/all.min.css">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="site-body">
+  <div id="pageLoader" class="page-loader" aria-hidden="true"><div class="loader-ring"></div></div>
+  <canvas id="particleCanvas" aria-hidden="true"></canvas>
+
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="index.htm">
+        <span class="brand-mark image-mark"><img src="assets/logos/logo-mark.png" alt="Play Uno Together"></span>
+        <span class="brand-copy">
+          <strong>PLAY UNO TOGETHER</strong>
+          <small>ONLINE</small>
+        </span>
+      </a>
+
+      <nav class="desktop-nav" id="mainNav" aria-label="Main menu">
+        <a href="index.htm" data-i18n="home">Home</a>
+        <a href="#modes" data-i18n="modes">Game Modes</a>
+        <a href="#rules" data-i18n="rules">Rules</a>
+        <a href="#community" data-i18n="community">Community</a>
+      </nav>
+
+      <div class="header-actions">
+        <button class="mobile-menu-btn" id="mobileMenuBtn" type="button" aria-label="Menu" aria-expanded="false"><i class="fa-solid fa-bars"></i></button>
+        <button class="btn btn-gold btn-small" id="headerDownloadBtn" data-sound="download" type="button">
+          <i class="fa-solid fa-download"></i>
+          <span data-i18n="download">Download Desktop</span>
+        </button>
+        <button class="btn btn-red btn-small" id="headerCreateBtn" data-sound="create" type="button">
+          <i class="fa-solid fa-plus"></i>
+          <span data-i18n="createRoom">Create Room</span>
+        </button>
+        <select class="language-select" data-lang-select="" aria-label="Language"><option value="en" selected="">EN</option><option value="tr">TR</option><option value="de">DE</option></select>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero section reveal">
+      <div class="container hero-grid">
+        <div class="hero-copy">
+          <div class="eyebrow">
+            <i class="fa-solid fa-fire"></i>
+            <span data-i18n="crazy">THE CRAZIEST UNO EXPERIENCE</span>
+          </div>
+
+          <h1>
+            <span data-i18n="compete">TAKE THE</span>
+            <strong data-i18n="rise">COMPETITION TO THE TOP!</strong>
+          </h1>
+
+          <p class="hero-text">
+            <span data-i18n="heroText">Create a room instantly, share the invite link, chat with friends and start the card chaos. In Play Uno Together, the table is yours.</span>
+          </p>
+
+          <div class="hero-actions">
+            <button class="btn btn-red btn-large" id="heroCreateBtn" data-sound="create" type="button">
+              <i class="fa-solid fa-plus-circle"></i>
+              <span data-i18n="createRoom">Create Room</span>
+            </button>
+            <button class="btn btn-dark btn-large" id="heroJoinBtn" data-sound="join" type="button">
+              <i class="fa-solid fa-door-open"></i>
+              <span data-i18n="joinRoom">Join Room</span>
+            </button>
+            <button class="btn btn-gold btn-large" id="heroDownloadBtn" data-sound="download" type="button">
+              <i class="fa-solid fa-download"></i>
+              <span data-i18n="download">Download Desktop</span>
+            </button>
+          </div>
+
+          <div class="stats">
+            <div class="stat">
+              <strong id="statPlayers" data-value="18420">18.420+</strong>
+              <span data-i18n="activePlayers">Active Players</span>
+            </div>
+            <div class="stat">
+              <strong id="statRooms" data-value="2140">2.140</strong>
+              <span data-i18n="openRooms">Open Rooms</span>
+            </div>
+            <div class="stat">
+              <strong id="statLatency">—</strong>
+              <span data-i18n="lowLatency">Low Latency</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="hero-cards" aria-hidden="true">
+          <div class="hero-glow"></div>
+
+          <div class="uno-card card-red card-a">
+            <span class="corner top">9</span>
+            <div class="oval"><b>9</b></div>
+            <span class="corner bottom">9</span>
+          </div>
+
+          <div class="uno-card card-yellow card-b">
+            <span class="corner top">5</span>
+            <div class="oval"><b>5</b></div>
+            <span class="corner bottom">5</span>
+          </div>
+
+          <div class="uno-card card-green card-c">
+            <span class="corner top"><i class="fa-solid fa-arrows-rotate"></i></span>
+            <div class="oval"><b><i class="fa-solid fa-arrows-rotate"></i></b></div>
+            <span class="corner bottom"><i class="fa-solid fa-arrows-rotate"></i></span>
+          </div>
+
+          <div class="uno-card card-black card-d">
+            <span class="corner top">+4</span>
+            <div class="oval wild">
+              <i></i><i></i><i></i><i></i>
+            </div>
+            <span class="corner bottom">+4</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="trailer" class="section trailer-section">
+      <div class="container">
+        <div class="section-heading">
+          <span data-i18n="stage">PLAY UNO TOGETHER ON STAGE</span>
+          <h2 data-i18n="feel">FEEL THE GAME</h2>
+          <p data-i18n="trailerText">Discover the pace, card chaos and table atmosphere of Play Uno Together.</p>
+        </div>
+        <div class="trailer-shell">
+          <div class="trailer-video-wrap">
+            <video id="trailerVideo" class="trailer-video" autoplay="" muted="" loop="" playsinline="" preload="metadata" poster="assets/media/showcase-1.png">
+              <source src="assets/video/uno-trailer-web.mp4" type="video/mp4">
+            </video>
+            <div class="trailer-overlay"></div>
+            <div class="trailer-content">
+              <div class="trailer-badge"><img src="assets/icons/spark.svg" alt=""> <span data-i18n="playUno">PLAY UNO TOGETHER</span></div>
+              <strong data-i18n="trailerTitle">BUILD THE TABLE. INVITE FRIENDS. SHUFFLE THE CARDS.</strong>
+              <span data-i18n="trailerDesc">Enter the lobby with one link, chat and move into the desktop game.</span>
+            </div>
+            <button class="trailer-sound" id="trailerSoundBtn" type="button" data-sound="click"><i class="fa-solid fa-volume-xmark"></i> <span data-i18n="openSound">Turn Sound On</span></button>
+          </div>
+        </div>
+
+        <div class="how-grid">
+          <div class="how-copy">
+            <div class="section-heading left">
+              <span data-i18n="threeSteps">THREE STEPS</span>
+              <h2 data-i18n="how">HOW IT WORKS</h2>
+              <p data-i18n="howDesc">Start using the room system in seconds.</p>
+            </div>
+            <div class="step-list">
+              <article><b>01</b><div><strong data-i18n="step1">Create your room</strong><p data-i18n="step1d">Choose your avatar, mode and player capacity.</p></div></article>
+              <article><b>02</b><div><strong data-i18n="step2">Share the link</strong><p data-i18n="step2d">Send the room code to friends and fill the lobby.</p></div></article>
+              <article><b>03</b><div><strong data-i18n="step3">Start with the app</strong><p data-i18n="step3d">Move to the desktop game when everyone is ready.</p></div></article>
+            </div>
+          </div>
+          <div class="how-video-wrap">
+            <video class="how-video" autoplay="" muted="" loop="" playsinline="" preload="metadata" poster="assets/media/showcase-2.png">
+              <source src="assets/video/how-it-works.mp4" type="video/mp4">
+            </video>
+          </div>
+        </div>
+
+        <div class="showcase-heading">
+          <span data-i18n="frames">TABLE SNAPSHOTS</span>
+          <h2 data-i18n="world">THE PLAY UNO TOGETHER WORLD</h2>
+        </div>
+        <div class="showcase-grid">
+          <figure><img src="assets/media/showcase-1.png" alt="Play Uno Together screenshot" loading="lazy"></figure>
+          <figure><img src="assets/media/showcase-2.png" alt="Play Uno Together screenshot" loading="lazy"></figure>
+          <figure><img src="assets/media/showcase-3.png" alt="Play Uno Together screenshot" loading="lazy"></figure>
+          <figure><img src="assets/media/showcase-4.png" alt="Play Uno Together screenshot" loading="lazy"></figure>
+          <figure><img src="assets/media/showcase-5.png" alt="Play Uno Together screenshot" loading="lazy"></figure>
+          <figure><img src="assets/media/showcase-6.png" alt="Play Uno Together screenshot" loading="lazy"></figure>
+        </div>
+      </div>
+    </section>
+
+    <section id="modes" class="section modes-section">
+      <div class="container">
+        <div class="section-heading">
+          <span data-i18n="table">CHOOSE YOUR TABLE</span>
+          <h2 data-i18n="modesTitle">GAME MODES</h2>
+          <p data-i18n="modesDesc">Pick a mode to open the room creation screen with your choice.</p>
+        </div>
+
+        <div class="mode-grid">
+          <button class="mode-card blue reveal" type="button" data-mode="Standart">
+            <span class="mode-icon"><i class="fa-solid fa-shield-halved"></i></span>
+            <strong>Standard</strong>
+            <p data-i18n="standardDesc">Balanced matches with classic UNO rules.</p>
+            <em data-i18n="chooseCreate">SELECT &amp; CREATE<i class="fa-solid fa-arrow-right"></i></em>
+          </button>
+
+          <button class="mode-card red reveal" type="button" data-mode="Acımasız">
+            <span class="mode-icon"><i class="fa-solid fa-skull"></i></span>
+            <strong>Brutal</strong>
+            <p data-i18n="brutalDesc">+6, stacking and harsher penalties.</p>
+            <em data-i18n="chooseCreate">SELECT &amp; CREATE<i class="fa-solid fa-arrow-right"></i></em>
+          </button>
+
+          <button class="mode-card purple reveal" type="button" data-mode="Çift Taraf">
+            <span class="mode-icon"><i class="fa-solid fa-repeat"></i></span>
+            <strong>Double Sided</strong>
+            <p data-i18n="doubleDesc">Switch to the dark side with double-sided cards.</p>
+            <em data-i18n="chooseCreate">SELECT &amp; CREATE<i class="fa-solid fa-arrow-right"></i></em>
+          </button>
+
+          <button class="mode-card green reveal" type="button" data-mode="Parti">
+            <span class="mode-icon"><i class="fa-solid fa-bolt"></i></span>
+            <strong>Party</strong>
+            <p data-i18n="partyDesc">Crowded tables and high tempo.</p>
+            <em data-i18n="chooseCreate">SELECT &amp; CREATE<i class="fa-solid fa-arrow-right"></i></em>
+          </button>
+
+          <button class="mode-card yellow reveal" type="button" data-mode="Hızlı">
+            <span class="mode-icon"><i class="fa-solid fa-stopwatch"></i></span>
+            <strong>Fast</strong>
+            <p data-i18n="fastDesc">Race with very short turn timers.</p>
+            <em data-i18n="chooseCreate">SELECT &amp; CREATE<i class="fa-solid fa-arrow-right"></i></em>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <section id="rules" class="section info-section">
+      <div class="container info-grid">
+        <div>
+          <div class="section-heading left">
+            <span data-i18n="tableRules">TABLE RULES</span>
+            <h2 data-i18n="rulesTitle">RULES</h2>
+            <p data-i18n="rulesDesc">A clear, simple and fun table setup for everyone in Play Uno Together rooms.</p>
+          </div>
+
+          <div class="info-list">
+            <article class="info-row">
+              <b>01</b>
+              <div>
+                <strong data-i18n="r1">Match a color or number.</strong>
+                <p data-i18n="r1d">Play a matching color, number or special card.</p>
+              </div>
+            </article>
+            <article class="info-row">
+              <b>02</b>
+              <div>
+                <strong data-i18n="r2">Remember to call UNO.</strong>
+                <p data-i18n="r2d">Call UNO when you have one card left and alert the table.</p>
+              </div>
+            </article>
+            <article class="info-row">
+              <b>03</b>
+              <div>
+                <strong data-i18n="r3">Respect turn order.</strong>
+                <p data-i18n="r3d">Make your move on your turn and keep the game flowing.</p>
+              </div>
+            </article>
+          </div>
+        </div>
+
+        <div id="community" class="community-panel">
+          <div class="section-heading left">
+            <span data-i18n="culture">PLAYER CULTURE</span>
+            <h2 data-i18n="communityTitle">COMMUNITY</h2>
+            <p data-i18n="communityDesc">Core principles for Play Uno Together tables.</p>
+          </div>
+
+          <div class="community-list">
+            <article>
+              <i class="fa-solid fa-heart"></i>
+              <div><strong data-i18n="respect">Respectful chat</strong><p data-i18n="respectD">Use chat without disturbing other players.</p></div>
+            </article>
+            <article>
+              <i class="fa-solid fa-users"></i>
+              <div><strong data-i18n="fair">Fair play</strong><p data-i18n="fairD">Avoid cheating, spam and intentional disruption.</p></div>
+            </article>
+            <article>
+              <i class="fa-solid fa-link"></i>
+              <div><strong data-i18n="invite">Share your invite</strong><p data-i18n="inviteD">Fill your table by sharing the room code or link.</p></div>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <div id="createModal" class="modal-backdrop hidden" role="dialog" aria-modal="true" aria-labelledby="createTitle">
+    <div class="modal-card">
+      <button class="modal-close" type="button" data-close="createModal" aria-label="Close">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+      <div class="modal-icon red"><i class="fa-solid fa-plus"></i></div>
+      <h3 id="createTitle" data-i18n="newRoom">Create New Room</h3>
+      <p data-i18n="createDesc">Choose your name, avatar and game mode. Your room code will be created instantly.</p>
+
+      <label class="field-label">
+        <span data-i18n="username">Username</span>
+        <input id="createName" maxlength="24" autocomplete="nickname" placeholder="Enter your username">
+      </label>
+
+      <div class="label-line"><span data-i18n="chooseAvatar">Choose your avatar</span><small>20</small></div>
+      <div id="createAvatars" class="avatar-grid"></div>
+
+      <label class="field-label">
+        <span data-i18n="mode">Game mode</span>
+        <select id="createMode"></select>
+      </label>
+
+      <label class="field-label">
+        <span data-i18n="playerCount">Player count</span>
+        <select id="createMaxPlayers" aria-label="Room player count"></select>
+      </label>
+
+      <div class="capacity-preview" id="capacityPreview"><i class="fa-solid fa-users"></i><span data-i18n="capacity">This room can hold up to {n} players.</span></div>
+
+      <button class="modal-action" id="createSubmitBtn" type="button" data-i18n="setupRoom">Create Room</button>
+    </div>
+  </div>
+
+  <div id="joinModal" class="modal-backdrop hidden" role="dialog" aria-modal="true" aria-labelledby="joinTitle">
+    <div class="modal-card">
+      <button class="modal-close" type="button" data-close="joinModal" aria-label="Close">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+      <div class="modal-icon yellow"><i class="fa-solid fa-door-open"></i></div>
+      <h3 id="joinTitle" data-i18n="joinRoom">Join Room</h3>
+      <p data-i18n="joinDesc">Use the room code or full room link sent by your friend.</p>
+
+      <label class="field-label">
+        <span data-i18n="roomCode">Room code or link</span>
+        <input id="joinCode" autocomplete="off" data-i18n-placeholder="roomCodePlaceholder" placeholder="Oda kodu veya oda linki">
+      </label>
+
+      <label class="field-label">
+        <span data-i18n="username">Username</span>
+        <input id="joinName" maxlength="24" autocomplete="nickname" placeholder="Enter your username">
+      </label>
+
+      <div class="label-line"><span data-i18n="chooseAvatar">Choose your avatar</span><small>20</small></div>
+      <div id="joinAvatars" class="avatar-grid"></div>
+
+      <button class="modal-action yellow-action" id="joinSubmitBtn" type="button" data-i18n="goRoom">Enter Room</button>
+    </div>
+  </div>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div class="footer-brand">
+        <img src="assets/logos/logo-mark.png" alt="" width="36" height="36">
+        <div>
+          <strong>PLAY UNO TOGETHER</strong>
+          <span data-i18n="footerTag">Create a table with friends instantly.</span>
+        </div>
+      </div>
+      <div class="footer-links">
+        <a href="#modes" data-i18n="modes">Game Modes</a>
+        <a href="#rules" data-i18n="rules">Rules</a>
+        <a href="#community" data-i18n="community">Community</a>
+      </div>
+      <p class="footer-copy">© 2026 Play Uno Together</p>
+    </div>
+  </footer>
+
+  <div id="toast" class="toast hidden" role="status"></div>
+
+  <script src="js/config.js"></script>
+  <script src="js/download.js"></script>
+  <script src="js/i18n.js"></script>
+  <script src="js/audio.js"></script>
+  <script src="js/sb-backend.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
