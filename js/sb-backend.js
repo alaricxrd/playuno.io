@@ -1,7 +1,7 @@
 // Play Uno Together — Supabase backend (replaces api.php; works on static hosting like Netlify)
 (function () {
-  const SB_URL = 'https://xnfdawxqauswzjhdfuth.supabase.co/rest/v1/';
-  const SB_KEY = 'sb_publishable_c7zmsOP97B0RF9Ni8kRLAQ_edESJvyl';
+  const SB_URL = 'https://nnrdqixpxxsiztnuhnoh.supabase.co/rest/v1/';
+  const SB_KEY = 'sb_publishable_w4A3lgOjtoUZ6cOLV4zJGQ_m5gEH-me';
   const CHARS = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
   const MODES = ['Standart', 'Acımasız', 'Çift Taraf', 'Parti', 'Hızlı'];
   const AVATARS = ['alex','emma','noah','sophia','liam','olivia','ethan','ava','mason','mia','lucas','luna','oliver','aria','james','zoe','leo','lily','max','grace'];
